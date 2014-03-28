@@ -20,12 +20,31 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
+cost = 0;
 
+for( i = 1 : m)
+  ht = sigmoid(X(i,:));
+%  fprintf('ht= %f\n', ht);
+%  disp('after ht');
+%  pause;
+  %cost
+  temp = (y(i) * log(ht)) + ((1-y(i)) * log(1-ht));
+  cost += temp;
 
+  %gradient
+  temp2 = ht - y(i);   
+  grad = grad + temp2 * X(i, :)' ;
+end
 
+J = -cost / m;
+disp('size of cost ' );
+disp(size(J));
+fprintf("Cost : %f\n", J);
 
+fprintf("Grad\n");
+disp(grad);
 
-
+pause;
 
 % =============================================================
 
