@@ -1,0 +1,12 @@
+  if(i == 1)
+    disp('y(i)');
+    disp(y(i));
+    disp('ht');
+    disp(ht);
+    disp('log(ht)');
+    disp(log(ht));
+    disp('term a:');
+    disp(-y(i) * log(ht));
+    disp('term b:');
+    disp((1-y(i)) * log(1-ht));
+  endif

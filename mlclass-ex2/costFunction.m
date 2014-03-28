@@ -23,12 +23,13 @@ grad = zeros(size(theta));
 cost = 0;
 
 for( i = 1 : m)
-  ht = sigmoid(X(i,:));
+  z = theta * X(i,:);
+  ht = sigmoid(z);
 %  fprintf('ht= %f\n', ht);
 %  disp('after ht');
 %  pause;
   %cost
-  temp = (y(i) * log(ht)) + ((1-y(i)) * log(1-ht));
+  temp = (-y(i) * log(ht)) - ((1-y(i)) * log(1-ht));
   cost += temp;
 
   %gradient
@@ -36,15 +37,18 @@ for( i = 1 : m)
   grad = grad + temp2 * X(i, :)' ;
 end
 
-J = -cost / m;
-disp('size of cost ' );
-disp(size(J));
-fprintf("Cost : %f\n", J);
+%disp('cost ' );
+%disp(cost);
 
-fprintf("Grad\n");
-disp(grad);
+J = cost / m;
+%disp('size of cost ' );
+%disp(size(J));
+%fprintf("Cost : %f\n", J);
 
-pause;
+%fprintf("Grad\n");
+%disp(grad);
+
+
 
 % =============================================================
 
