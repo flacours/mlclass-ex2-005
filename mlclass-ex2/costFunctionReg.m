@@ -18,6 +18,38 @@ grad = zeros(size(theta));
 %               derivatives of the cost w.r.t. each parameter in theta
 
 
+cost = 0;
+n = length(theta);
+for( i = 1 : m)
+  z = theta' * X(i,:)';
+  ht = sigmoid(z);
+  temp = (-y(i) * log(ht)) - ((1-y(i)) * log(1-ht));
+  cost += temp;
+
+  grad = grad + (ht - y(i)) * X(i, :)';
+
+end
+
+% regularisation
+total = 0;
+
+for (j = 2 : n)
+    total += theta(j)**2;
+end
+reg = lambda/(2*m) * total;
+
+J = cost / m + reg;
+
+total = 0;
+
+grad = grad / m ;
+for (j = 2 : n)
+    grad(j) += lambda/m * theta(j);
+end
+
+
+
+
 
 
 
