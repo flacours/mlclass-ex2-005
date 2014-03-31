@@ -21,29 +21,33 @@ grad = zeros(size(theta));
 %
 
 cost = 0;
-
+n = length(theta);
 for( i = 1 : m)
-  z = theta * X(i,:);
+  z = theta' * X(i,:)';
   ht = sigmoid(z);
-%  fprintf('ht= %f\n', ht);
-%  disp('after ht');
-%  pause;
-  %cost
   temp = (-y(i) * log(ht)) - ((1-y(i)) * log(1-ht));
   cost += temp;
 
-  %gradient
-  temp2 = ht - y(i);   
-  grad = grad + temp2 * X(i, :)' ;
+  grad = grad + (ht - y(i)) * X(i, :)';
+
 end
 
-%disp('cost ' );
-%disp(cost);
-
 J = cost / m;
-%disp('size of cost ' );
-%disp(size(J));
-%fprintf("Cost : %f\n", J);
+grad = grad / m;
+
+
+%for( j = 1 : n)
+%  sum = 0;
+%  for( i = 1 : m)
+%    z = theta(j) * X(i,j);
+%    ht = sigmoid(z);%
+
+%    g  = (ht - y(i)) * X(i, j) ;
+%    sum += g;
+%  end
+%  grad(j) = sum/m;
+%end
+
 
 %fprintf("Grad\n");
 %disp(grad);
